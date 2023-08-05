@@ -1,0 +1,15 @@
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\bin\Debug\netcoreapp3.1\ActivityManagement.Service.deps.json
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\bin\Debug\netcoreapp3.1\ActivityManagement.Service.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\bin\Debug\netcoreapp3.1\ActivityManagement.Service.pdb
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\bin\Debug\netcoreapp3.1\ActivityManagement.Domain.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\bin\Debug\netcoreapp3.1\ActivityManagement.Repository.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\bin\Debug\netcoreapp3.1\ActivityManagement.Domain.pdb
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\bin\Debug\netcoreapp3.1\ActivityManagement.Repository.pdb
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\obj\Debug\netcoreapp3.1\ActivityManagement.Service.csproj.AssemblyReference.cache
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\obj\Debug\netcoreapp3.1\ActivityManagement.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\obj\Debug\netcoreapp3.1\ActivityManagement.Service.AssemblyInfoInputs.cache
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\obj\Debug\netcoreapp3.1\ActivityManagement.Service.AssemblyInfo.cs
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\obj\Debug\netcoreapp3.1\ActivityManagement.Service.csproj.CoreCompileInputs.cache
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\obj\Debug\netcoreapp3.1\ActivityManagement.Service.csproj.CopyComplete
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\obj\Debug\netcoreapp3.1\ActivityManagement.Service.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Service\obj\Debug\netcoreapp3.1\ActivityManagement.Service.pdb

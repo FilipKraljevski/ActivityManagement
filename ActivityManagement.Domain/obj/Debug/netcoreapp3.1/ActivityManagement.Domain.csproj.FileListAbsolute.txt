@@ -1,0 +1,10 @@
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Domain\bin\Debug\netcoreapp3.1\ActivityManagement.Domain.deps.json
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Domain\bin\Debug\netcoreapp3.1\ActivityManagement.Domain.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Domain\bin\Debug\netcoreapp3.1\ActivityManagement.Domain.pdb
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Domain\obj\Debug\netcoreapp3.1\ActivityManagement.Domain.csproj.AssemblyReference.cache
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Domain\obj\Debug\netcoreapp3.1\ActivityManagement.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Domain\obj\Debug\netcoreapp3.1\ActivityManagement.Domain.AssemblyInfoInputs.cache
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Domain\obj\Debug\netcoreapp3.1\ActivityManagement.Domain.AssemblyInfo.cs
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Domain\obj\Debug\netcoreapp3.1\ActivityManagement.Domain.csproj.CoreCompileInputs.cache
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Domain\obj\Debug\netcoreapp3.1\ActivityManagement.Domain.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Domain\obj\Debug\netcoreapp3.1\ActivityManagement.Domain.pdb
