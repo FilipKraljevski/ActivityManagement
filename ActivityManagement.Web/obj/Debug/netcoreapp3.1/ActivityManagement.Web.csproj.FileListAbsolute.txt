@@ -178,3 +178,14 @@ C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\
 C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\obj\Debug\netcoreapp3.1\Razor\Views\Activity\Create.cshtml.g.cs
 C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\obj\Debug\netcoreapp3.1\Razor\Views\Activity\Index.cshtml.g.cs
 C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\obj\Debug\netcoreapp3.1\Razor\Views\User\Index.cshtml.g.cs
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\Debug\netcoreapp3.1\BouncyCastle.Cryptography.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\Debug\netcoreapp3.1\System.Formats.Asn1.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\Debug\netcoreapp3.1\System.Security.Cryptography.Cng.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\Debug\netcoreapp3.1\System.Security.Cryptography.Pkcs.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Cng.dll
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\obj\Debug\netcoreapp3.1\Razor\Views\Email\Index.cshtml.g.cs
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\obj\Debug\netcoreapp3.1\Razor\Views\Activity\SendEmail.cshtml.g.cs

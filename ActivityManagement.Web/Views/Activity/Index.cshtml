@@ -38,10 +38,6 @@
     </div>
 
     <div class="row mt-2">
-        <a class="btn btn-success" asp-action="Create">Insert New Activity</a>
-    </div>
-
-    <div class="row">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -62,5 +58,20 @@
                 }
             </tbody>
         </table>
+    </div>
+
+    <div class="row">
+        <div class="col mt-5">
+            <a class="btn btn-success" asp-action="Create">Insert New Activity</a>
+        </div>
+        <div class="col">
+            <form asp-controller="Activity" asp-action="SendEmail">
+                <div class="form-group">
+                    <label class="control-label">Send this report</label>
+                    <input class="form-control" type="email" name="toEmail" required placeholder="username@mail.com"/>
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Send</button>
+            </form>
+        </div>
     </div>
 </div>

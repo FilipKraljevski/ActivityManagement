@@ -3,6 +3,7 @@ using ActivityManagement.Domain.Model;
 using ActivityManagement.Service.Interface;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,12 @@ namespace ActivityManagement.Web.Controllers
     public class ActivityController : Controller
     {
         private readonly IActivityService _activityService;
+        private readonly IEmailService _emailService;
 
-        public ActivityController(IActivityService activityService)
+        public ActivityController(IActivityService activityService, IEmailService emailService)
         {
             _activityService = activityService;
+            _emailService = emailService;
         }
 
         public IActionResult Index()
@@ -49,6 +52,8 @@ namespace ActivityManagement.Web.Controllers
         [HttpPost]
         public IActionResult FilterByTimeInterval(DateTime from, DateTime to)
         {
+            HttpContext.Session.SetString("DateFilterFrom", from.ToString());
+            HttpContext.Session.SetString("DateFilterTo", to.ToString());
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             List<Activity> activities = _activityService.GetActivitiesByTimeInterval(userId, from, to);
             return View("Index", activities);
@@ -90,6 +95,16 @@ namespace ActivityManagement.Web.Controllers
                     return File(content, contentType, fileName);
                 }
             }
+        }
+
+        [HttpPost]
+        public IActionResult SendEmail(String toEmail)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string from = HttpContext.Session.GetString("DateFilterFrom");
+            string to = HttpContext.Session.GetString("DateFilterTo");
+            _emailService.Send(toEmail, from, to, userId);
+            return View();
         }
     }
 }

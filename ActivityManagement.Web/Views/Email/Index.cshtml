@@ -1,0 +1,30 @@
+﻿@model List<Activity> 
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+     <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Time Spent</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i< Model.Count(); i++)
+                {
+                    var item = Model[i];
+                    <tr>
+                        <td>@item.Date</td>
+                        <td>@item.Description</td>
+                        <td>@item.TimeSpent</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

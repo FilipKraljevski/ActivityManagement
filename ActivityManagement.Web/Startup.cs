@@ -1,3 +1,4 @@
+using ActivityManagement.Domain;
 using ActivityManagement.Domain.Identity;
 using ActivityManagement.Repository;
 using ActivityManagement.Repository.Implementation;
@@ -22,9 +23,12 @@ namespace ActivityManagement.Web
 {
     public class Startup
     {
+        private EmailSettings emailSettings;
         public Startup(IConfiguration configuration)
         {
+            emailSettings = new EmailSettings();
             Configuration = configuration;
+            Configuration.GetSection("EmailSettings").Bind(emailSettings);
         }
 
         public IConfiguration Configuration { get; }
@@ -41,8 +45,20 @@ namespace ActivityManagement.Web
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 
+            services.AddTransient<EmailSettings>(es => emailSettings);
+            services.AddTransient<IEmailService, EmailService>(email => new EmailService(emailSettings));
+
             services.AddTransient<IActivityService, ActivityService>();
             services.AddTransient<IUserService, UserService>();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -69,6 +85,8 @@ namespace ActivityManagement.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
