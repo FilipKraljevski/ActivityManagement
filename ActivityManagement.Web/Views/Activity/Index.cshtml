@@ -1,4 +1,4 @@
-﻿@model List<Activity> 
+﻿@model ActivityManagement.Repository.PaginatedList<Activity> 
 
 @{
     ViewData["Title"] = "Index";
@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col">
-            <form asp-controller="Activity" asp-action="FilterByTimeInterval">
+            <form asp-controller="Activity" asp-action="Index" method="get">
                 <div class="form-group">
                     <label class="control-label">Search by Date From</label>
                     <input class="form-control" type="date" name="from" required/>
@@ -58,6 +58,9 @@
                 }
             </tbody>
         </table>
+        <div>
+            <a asp-action="ResetFilter" class="btn btn-danger">Reset Filter by Date</a>
+        </div>
     </div>
 
     <div class="row">
@@ -73,5 +76,23 @@
                 <button type="submit" class="btn btn-outline-primary">Send</button>
             </form>
         </div>
+    </div>
+
+    <div class="row">
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
     </div>
 </div>

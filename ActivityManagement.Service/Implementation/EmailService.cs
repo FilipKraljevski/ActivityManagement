@@ -18,13 +18,13 @@ namespace ActivityManagement.Service.Implementation
             this.emailSettings = emailSettings;
         }
 
-        public void Send(string to, string dateFrom, string dateTo, string userId)
+        public void Send(string toEmail, string dateFrom, string dateTo, string userId)
         {
             var email = new MimeMessage();
             email.From.Add(new MailboxAddress(emailSettings.EmailDisplayName, emailSettings.SmtpUserName));
-            email.To.Add(new MailboxAddress(to, to));
+            email.To.Add(new MailboxAddress(toEmail, toEmail));
             email.Subject = "Report Sent";
-            string url = "https://localhost:44361/Email/Index?userId=" + userId + "&from=" + dateFrom + "&to=" + dateTo;
+            string url = "https://localhost:44361/Email/Save?userId=" + userId + "&from=" + dateFrom + "&to=" + dateTo;
             email.Body = new TextPart(MimeKit.Text.TextFormat.Plain) { Text = url };
 
             using var smtp = new SmtpClient();

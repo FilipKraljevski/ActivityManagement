@@ -6,6 +6,6 @@ namespace ActivityManagement.Service.Interface
 {
     public interface IEmailService
     {
-        void Send(string to, string dateFrom, string dateTo, string userId);
+        void Send(string toEmail, string dateFrom, string dateTo, string userId);
     }
 }

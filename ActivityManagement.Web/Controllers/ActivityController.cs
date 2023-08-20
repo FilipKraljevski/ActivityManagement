@@ -1,5 +1,6 @@
 ﻿using ActivityManagement.Domain.DTO;
 using ActivityManagement.Domain.Model;
+using ActivityManagement.Repository;
 using ActivityManagement.Service.Interface;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Authorization;
@@ -8,7 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ActivityManagement.Web.Controllers
 {
@@ -24,11 +27,23 @@ namespace ActivityManagement.Web.Controllers
             _emailService = emailService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string from, string to, int? pageNumber)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            List<Activity> activities = _activityService.GetAllActivities(userId);
-            return View(activities);
+            List<Activity> activities;
+            if (from != null && to != null)
+            {
+                HttpContext.Session.SetString("DateFilterFrom", from);
+                HttpContext.Session.SetString("DateFilterTo", to);
+                activities = _activityService.GetActivitiesByTimeInterval(userId, DateTime.Parse(from), DateTime.Parse(to));
+            }
+            else
+            {
+                HttpContext.Session.Clear();
+                activities = _activityService.GetAllActivities(userId);
+            }
+            return View(PaginatedList<Activity>.Create(activities.OrderBy(a => a.Date).ToList(), 
+                pageNumber ?? 1, 5));
         }
 
         public IActionResult Create()
@@ -49,14 +64,10 @@ namespace ActivityManagement.Web.Controllers
             return View(activityDto);
         }
 
-        [HttpPost]
-        public IActionResult FilterByTimeInterval(DateTime from, DateTime to)
+        public IActionResult ResetFilter()
         {
-            HttpContext.Session.SetString("DateFilterFrom", from.ToString());
-            HttpContext.Session.SetString("DateFilterTo", to.ToString());
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            List<Activity> activities = _activityService.GetActivitiesByTimeInterval(userId, from, to);
-            return View("Index", activities);
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -98,7 +109,7 @@ namespace ActivityManagement.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult SendEmail(String toEmail)
+        public IActionResult SendEmail(string toEmail)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             string from = HttpContext.Session.GetString("DateFilterFrom");
