@@ -39,6 +39,25 @@
            class="btn btn-default @prevDisabled">
             Previous
         </a>
+        @for (int i = 1; i<= Model.TotalPages; i++)
+        {
+            @if(Model.PageIndex == i)
+            {
+                <a asp-action="Index"
+                   asp-route-pageNumber="@(i)"
+                   class="btn btn-default btn-outline-secondary">
+                    @(i)
+                </a>
+            }
+            @if(Model.PageIndex != i)
+            {
+                <a asp-action="Index"
+                   asp-route-pageNumber="@(i)"
+                   class="btn btn-default">
+                    @(i)
+                </a>
+            }
+        }
         <a asp-action="Index"
            asp-route-pageNumber="@(Model.PageIndex + 1)"
            class="btn btn-default @nextDisabled">

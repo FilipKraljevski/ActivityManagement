@@ -50,6 +50,7 @@ namespace ActivityManagement.Web
 
             services.AddTransient<IActivityService, ActivityService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ILinkCodeService, LinkCodeService>();
 
             services.AddDistributedMemoryCache();
             services.AddSession(options =>

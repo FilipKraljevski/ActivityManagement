@@ -189,3 +189,5 @@ C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\
 C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Cng.dll
 C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\obj\Debug\netcoreapp3.1\Razor\Views\Email\Index.cshtml.g.cs
 C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\obj\Debug\netcoreapp3.1\Razor\Views\Activity\SendEmail.cshtml.g.cs
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\obj\Debug\netcoreapp3.1\Razor\Views\Email\CodeInput.cshtml.g.cs
+C:\Users\filip\Desktop\vezbi\ProektArtHouse\Activity\ActivityManagement.Web\obj\Debug\netcoreapp3.1\Razor\Views\Email\Error.cshtml.g.cs

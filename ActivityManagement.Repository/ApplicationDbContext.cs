@@ -16,12 +16,17 @@ namespace ActivityManagement.Repository
         }
 
         public virtual DbSet<Activity> Activities { get; set; }
+        public virtual DbSet<LinkCode> LinkCodes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<Activity>()
+                .Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+
+            builder.Entity<LinkCode>()
                 .Property(x => x.Id)
                 .ValueGeneratedOnAdd();
         }

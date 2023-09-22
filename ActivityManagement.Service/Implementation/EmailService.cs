@@ -18,14 +18,16 @@ namespace ActivityManagement.Service.Implementation
             this.emailSettings = emailSettings;
         }
 
-        public void Send(string toEmail, string dateFrom, string dateTo, string userId)
+        public void Send(string toEmail, string code, string link)
         {
             var email = new MimeMessage();
             email.From.Add(new MailboxAddress(emailSettings.EmailDisplayName, emailSettings.SmtpUserName));
             email.To.Add(new MailboxAddress(toEmail, toEmail));
             email.Subject = "Report Sent";
-            string url = "https://localhost:44361/Email/Save?userId=" + userId + "&from=" + dateFrom + "&to=" + dateTo;
-            email.Body = new TextPart(MimeKit.Text.TextFormat.Plain) { Text = url };
+            string text = link + "\n" +
+                    "The code to access the link " + code + "\n" +
+                    "The link will expire in 48 hours counting from the time the email was sent";
+            email.Body = new TextPart(MimeKit.Text.TextFormat.Plain) { Text = text };
 
             using var smtp = new SmtpClient();
             var socketOptions = emailSettings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.Auto;

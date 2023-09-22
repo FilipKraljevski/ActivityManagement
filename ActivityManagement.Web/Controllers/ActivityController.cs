@@ -20,11 +20,13 @@ namespace ActivityManagement.Web.Controllers
     {
         private readonly IActivityService _activityService;
         private readonly IEmailService _emailService;
+        private readonly ILinkCodeService _linkCodeService;
 
-        public ActivityController(IActivityService activityService, IEmailService emailService)
+        public ActivityController(IActivityService activityService, IEmailService emailService, ILinkCodeService linkCodeService)
         {
             _activityService = activityService;
             _emailService = emailService;
+            _linkCodeService = linkCodeService;
         }
 
         public IActionResult Index(string from, string to, int? pageNumber)
@@ -114,7 +116,17 @@ namespace ActivityManagement.Web.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             string from = HttpContext.Session.GetString("DateFilterFrom");
             string to = HttpContext.Session.GetString("DateFilterTo");
-            _emailService.Send(toEmail, from, to, userId);
+            Random rnd = new Random();
+            string str = "abcdefghijklmnopqrstuvwxyz0123456789";
+            string code = "";
+            for (int i = 0; i < 5; i++)
+            {
+                int x = rnd.Next(str.Length);
+                code += str[x];
+            }
+            string url = "https://localhost:44361/Email/Save?userId=" + userId + "&from=" + from + "&to=" + to;
+            _linkCodeService.Create(toEmail, code, url);
+            _emailService.Send(toEmail, code, url);
             return View();
         }
     }
