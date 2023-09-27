@@ -18,24 +18,26 @@ namespace ActivityManagement.Service.Implementation
             _linkCodeRepository = linkCodeRepository;
         }
 
-        public void Create(string email, string code, string url)
+        public void Create(string email, string code, string userId, string from, string to)
         {
             LinkCode linkCode = new LinkCode
             {
                 Id = Guid.NewGuid(),
                 Email = email,
                 Code = code,
-                Link = url,
+                UserId = userId,
+                DateFrom = from,
+                DateTo = to,
                 Expire = DateTime.Now.AddDays(2)
             };
             _linkCodeRepository.Insert(linkCode);
         }
 
-        public bool CheckLinkCode(LinkCodeDto linkCodeDto, string link)
+        public LinkCode CheckLinkCode(LinkCodeDto linkCodeDto)
         {
             List<LinkCode> linkCodes = _linkCodeRepository.GetAll().ToList();
-            return linkCodes.Exists(lc => lc.Email.Equals(linkCodeDto.Email) &&
-                lc.Code.Equals(linkCodeDto.Code) && lc.Link.Equals(link) && lc.Expire >= DateTime.Now);
+            return linkCodes.Find(lc => lc.Email.Equals(linkCodeDto.Email) &&
+                lc.Code.Equals(linkCodeDto.Code) && lc.Expire >= DateTime.Now);
         }
     }
 }

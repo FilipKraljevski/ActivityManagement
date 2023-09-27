@@ -82,6 +82,19 @@
         @{
             var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
             var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            int pi = 1;
+            int count = 0;
+            if(Model.TotalPages > 10){
+                if(Model.TotalPages - Model.PageIndex < 10)
+                {
+                    int tmp = 10 - ((Model.TotalPages - Model.PageIndex) + 1);
+                    pi = Model.PageIndex - tmp;
+                }
+                else
+                {
+                    pi = Model.PageIndex;
+                }
+            }
         }
 
         <a asp-action="Index"
@@ -89,24 +102,30 @@
            class="btn btn-default @prevDisabled">
             Previous
         </a>
-        @for (int i = 1; i<= Model.TotalPages; i++)
+
+        @for (; pi<= Model.TotalPages; pi++)
         {
-            @if(Model.PageIndex == i)
+            if(count == 10)
+            {
+                break;
+            }
+            if(Model.PageIndex == pi)
             {
                 <a asp-action="Index"
-                   asp-route-pageNumber="@(i)"
+                   asp-route-pageNumber="@(pi)"
                    class="btn btn-default btn-outline-secondary">
-                    @(i)
+                    @(pi)
                 </a>
             }
-            @if(Model.PageIndex != i)
+            if(Model.PageIndex != pi)
             {
                 <a asp-action="Index"
-                   asp-route-pageNumber="@(i)"
+                   asp-route-pageNumber="@(pi)"
                    class="btn btn-default">
-                    @(i)
+                    @(pi)
                 </a>
             }
+            count++;
         }
         <a asp-action="Index"
            asp-route-pageNumber="@(Model.PageIndex + 1)"

@@ -39,9 +39,15 @@ namespace ActivityManagement.Web.Controllers
                 HttpContext.Session.SetString("DateFilterTo", to);
                 activities = _activityService.GetActivitiesByTimeInterval(userId, DateTime.Parse(from), DateTime.Parse(to));
             }
+            else if(HttpContext.Session.GetString("DateFilterFrom") != null && 
+                HttpContext.Session.GetString("DateFilterTo") != null)
+            {
+                string f = HttpContext.Session.GetString("DateFilterFrom");
+                string t = HttpContext.Session.GetString("DateFilterTo");
+                activities = _activityService.GetActivitiesByTimeInterval(userId, DateTime.Parse(f), DateTime.Parse(t));
+            }
             else
             {
-                HttpContext.Session.Clear();
                 activities = _activityService.GetAllActivities(userId);
             }
             return View(PaginatedList<Activity>.Create(activities.OrderBy(a => a.Date).ToList(), 
@@ -124,8 +130,8 @@ namespace ActivityManagement.Web.Controllers
                 int x = rnd.Next(str.Length);
                 code += str[x];
             }
-            string url = "https://localhost:44361/Email/Save?userId=" + userId + "&from=" + from + "&to=" + to;
-            _linkCodeService.Create(toEmail, code, url);
+            string url = "https://localhost:44361/Email/Index";
+            _linkCodeService.Create(toEmail, code, userId, from, to);
             _emailService.Send(toEmail, code, url);
             return View();
         }

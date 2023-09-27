@@ -48,27 +48,10 @@ namespace ActivityManagement.Web.Controllers
                 pageNumber ?? 1, 5));
         }
 
-        public IActionResult Save(string userId, string from, string to)
+        public IActionResult Reset()
         {
             HttpContext.Session.Clear();
-            HttpContext.Session.SetString("Validate", "False");
-            if(userId == null)
-            {
-                return RedirectToAction("Error");
-            }
-            HttpContext.Session.SetString("UserId", userId);
-            HttpContext.Session.SetString("Link", HttpContext.Request.GetDisplayUrl());
-            if (from != null && to != null)
-            {
-                HttpContext.Session.SetString("DateFromEmail", from);
-                HttpContext.Session.SetString("DateToEmail", to);
-            }
-            return RedirectToAction("CodeInput");
-        }
-
-        public IActionResult Error()
-        {
-            return View();
+            return RedirectToAction("Index");
         }
 
         public IActionResult CodeInput()
@@ -80,14 +63,15 @@ namespace ActivityManagement.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CodeInput(LinkCodeDto linkCodeDto)
         {
-            string link =  HttpContext.Session.GetString("Link");
-            if(link == null)
+            LinkCode linkCode = _linkCodeService.CheckLinkCode(linkCodeDto);
+            if (linkCode != null)
             {
-                ModelState.AddModelError("message", "Please access the site from the link in your mail");
-                return View(linkCodeDto);
-            }
-            if (_linkCodeService.CheckLinkCode(linkCodeDto, link))
-            {
+                HttpContext.Session.SetString("UserId", linkCode.UserId);
+                if (linkCode.DateFrom != null && linkCode.DateTo != null) 
+                { 
+                    HttpContext.Session.SetString("DateFromEmail", linkCode.DateFrom);
+                    HttpContext.Session.SetString("DateToEmail", linkCode.DateTo);
+                }
                 HttpContext.Session.SetString("Validate", "Yes");
                 return RedirectToAction("Index");
             }
