@@ -122,17 +122,9 @@ namespace ActivityManagement.Web.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             string from = HttpContext.Session.GetString("DateFilterFrom");
             string to = HttpContext.Session.GetString("DateFilterTo");
-            Random rnd = new Random();
-            string str = "abcdefghijklmnopqrstuvwxyz0123456789";
-            string code = "";
-            for (int i = 0; i < 5; i++)
-            {
-                int x = rnd.Next(str.Length);
-                code += str[x];
-            }
             string url = "https://localhost:44361/Email/Index";
-            _linkCodeService.Create(toEmail, code, userId, from, to);
-            _emailService.Send(toEmail, code, url);
+            LinkCode linkcode = _linkCodeService.Create(toEmail, userId, from, to);
+            _emailService.Send(toEmail, linkcode.Id.ToString(), url);
             return View();
         }
     }
