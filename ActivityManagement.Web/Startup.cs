@@ -5,6 +5,7 @@ using ActivityManagement.Repository.Implementation;
 using ActivityManagement.Repository.Inteface;
 using ActivityManagement.Service.Implementation;
 using ActivityManagement.Service.Interface;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,6 +42,11 @@ namespace ActivityManagement.Web
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<ActivityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/Account/Login";
+            });
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
@@ -93,7 +99,7 @@ namespace ActivityManagement.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Account}/{action=Login}/{id?}");
+                    pattern: "{controller=Activity}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

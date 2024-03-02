@@ -9,6 +9,7 @@ namespace ActivityManagement.Service.Interface
     public interface ILinkCodeService
     {
         LinkCode Create(string email, string userId, string from, string to);
-        LinkCode CheckLinkCode(LinkCodeDto linkCodeDto);
+
+        LinkCode CheckLinkCode(string linkCode);
     }
 }

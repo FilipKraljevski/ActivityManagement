@@ -33,11 +33,10 @@ namespace ActivityManagement.Service.Implementation
             return linkCode;
         }
 
-        public LinkCode CheckLinkCode(LinkCodeDto linkCodeDto)
+        public LinkCode CheckLinkCode(string linkCode)
         {
             List<LinkCode> linkCodes = _linkCodeRepository.GetAll().ToList();
-            return linkCodes.Find(lc => lc.Email.Equals(linkCodeDto.Email) &&
-                lc.Id.ToString().Equals(linkCodeDto.Code) && lc.Expire >= DateTime.Now);
+            return linkCodes.Find(lc => lc.Id.ToString().Equals(linkCode) && lc.Expire >= DateTime.Now);
         }
     }
 }

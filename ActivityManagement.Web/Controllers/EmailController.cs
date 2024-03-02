@@ -24,28 +24,39 @@ namespace ActivityManagement.Web.Controllers
             _linkCodeService = linkCodeService;
         }
 
-        public IActionResult Index(int? pageNumber)
+        public IActionResult Index(string code, int? pageNumber)
         {
-            string check = HttpContext.Session.GetString("Validate");
-            if (check == null || !check.Equals("Yes"))
+            if (code == null)
             {
-                return RedirectToAction("CodeInput");
+                return RedirectToAction("Error");
             }
+            HttpContext.Session.SetString("Code", code);
+            LinkCode linkCode = _linkCodeService.CheckLinkCode(code);
             List<Activity> activities;
-            string userId = HttpContext.Session.GetString("UserId");
-            string from = HttpContext.Session.GetString("DateFromEmail");
-            string to = HttpContext.Session.GetString("DateToEmail");
-            if (from == null || to == null)
+            if (linkCode != null)
             {
-                activities = _activityService.GetAllActivities(userId);
+                if (linkCode.DateFrom != null && linkCode.DateTo != null)
+                {
+                    activities = _activityService.GetActivitiesByTimeInterval(linkCode.UserId,
+                        DateTime.Parse(linkCode.DateFrom), DateTime.Parse(linkCode.DateTo));
+                }
+                else
+                {
+                    activities = _activityService.GetAllActivities(linkCode.UserId);
+                }
+                return View(PaginatedList<Activity>.Create(activities.OrderBy(a => a.Date).ToList(),
+                    pageNumber ?? 1, 5));
             }
             else
             {
-                activities = _activityService.GetActivitiesByTimeInterval(userId, DateTime.Parse(from), 
-                    DateTime.Parse(to));
+                return RedirectToAction("Error");
             }
-            return View(PaginatedList<Activity>.Create(activities.OrderBy(a => a.Date).ToList(), 
-                pageNumber ?? 1, 5));
+        }
+
+        public IActionResult Paginate(int pageNumber)
+        {
+            string code = HttpContext.Session.GetString("Code");
+            return RedirectToAction("Index", new { code, pageNumber });
         }
 
         public IActionResult Reset()
@@ -54,16 +65,16 @@ namespace ActivityManagement.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult CodeInput()
+        public IActionResult Error()
         {
             return View();
         }
 
-        [HttpPost]
+       /* [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CodeInput(LinkCodeDto linkCodeDto)
         {
-            LinkCode linkCode = _linkCodeService.CheckLinkCode(linkCodeDto);
+           *LinkCode linkCode = _linkCodeService.CheckLinkCode(linkCodeDto);
             if (linkCode != null)
             {
                 HttpContext.Session.SetString("UserId", linkCode.UserId);
@@ -77,6 +88,6 @@ namespace ActivityManagement.Web.Controllers
             }
             ModelState.AddModelError("message", "Invalid email or code or the link has expired");
             return View(linkCodeDto);
-        }
+        }*/
     }
 }
